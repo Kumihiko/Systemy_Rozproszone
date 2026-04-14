@@ -14,6 +14,6 @@ Wymagania Biznesowe
 2.	Interfejs graficzny, umożliwiający rozróżnianie dla jakiej grupy osób są zadania, jakie mają priorytety. 
 3.	Zapewnienie aktualizacji prac w czasie rzeczywistym dla wszystkich korzystających z danej tablicy, Wyświetlanie statusów kto nad czym pracuje w danym momencie, komunikaty o aktualizacjach w śledzonych zadaniach, podgląd innych zadań.
 4.	Integracja z innymi aplikacjami wspierającymi prace zespołu, 
-5.	Elastyczne w konfiguracji, aby każdy mógł sobie poustawiać według swoich upodobań, poprzesuwać kartki z zadaniami w różne miejsca, zmienić wersje kolorystyczne.
-6.	Możliwość generowania raportów do analizy pracy zespołu
-7.	Możliwość współpracy i komunikacji zespołów
+5.	Elastyczna konfiguracja, każdy użytkownik powinien mieć możliwość personalizacji według swoich upodobań, przestawiać kartki z zadaniami w inne miejsca niż domyślne, czy ustawiać inne kolory
+6.	Możliwość generowania raportów, z poszczególnych zadań oraz poszczególnych pracowników do analizy pracy 
+7.	Komunikator pozwalający rozmawiać członkom zespołu jak i między zespołami
