@@ -17,3 +17,27 @@ Wymagania Biznesowe
 5.	Elastyczna konfiguracja, każdy użytkownik powinien mieć możliwość personalizacji według swoich upodobań, przestawiać kartki z zadaniami w inne miejsca niż domyślne, czy ustawiać inne kolory
 6.	Możliwość generowania raportów, z poszczególnych zadań oraz poszczególnych pracowników do analizy pracy 
 7.	Komunikator pozwalający rozmawiać członkom zespołu jak i między zespołami
+
+Opis komunikacji 
+  Nadawca        Odbiorca        Mechanizm        Przesyłane dane
+
+1. Komunikacja Synchroniczna
+- Aplikacja Webowa - Api Gateway - HTTP/REST - Dane logowania, formularze zadań
+- Api Gateway - Auth Service - RPC/Internal - Tokeny dostępowe. identyfikatory sesji, uprawnienia uzytkownikow
+- Service layer - Auth Service - Internal - Żądania weryfikacji tożsamości
+- Service layer - Redis - In Memory -  Szybkie zapytania o stan sesji, krótkotrwały cache danych
+- Service layer - Database Cluster - SQL - Zapytania o treść zadań, dane pracowników
+- Load Balancer - Web APP / Backend - HTTP - Ruch sieciowy uzytkownika rozdzielany na instancje serwerów
+
+2. Komunikacja Asynchroniczna
+- Service layer - Kafka - Event Bus - zdarzenia systemowe np. zadanie ukończone / nowy komentarz
+- Kafka - Task Processing - Message queue - dane do ciezkich procesow, pliki do importu
+- Kafka - Integration Service - Event / Webhook - Dane dla systemów trzecich
+- Integration Service - Zewnętrzne integracje - Api / Webhook - Zdarzenia kalendarza, statusy repozytoriów
+- Kafka - Notification Service - Pub/Sub - Id uzytkwnika docelowego, tresc komunikatu, typ powiadomienia
+- Kafka - Raporty / Analiza - Batch Processing - Surowe dane o aktywności do raportów
+
+3. Jakie dane są przesyłane
+- SQL - Kto, co i kiedy zrobił. Kluczowe dla integralności systemu, muszą byc zapisywane synchronicznie aby uzytkownik mial pewnosc ze jego zmiana jest utrwalona
+- Eventy - Któtkie komunikaty o zmianie statusu. Zamiast przesyłac całe zadania, system przesyła informacje np. "uzytkownik X zmienił status zadania Y"
+- Websockety - Dane przesyłane do serwisow czasu rzeczywistego, które wypychają zmiany do przeglądarki użytkownika bez konieczności odświeżania strony
