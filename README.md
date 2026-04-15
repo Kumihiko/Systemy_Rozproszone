@@ -18,7 +18,7 @@ Wymagania Biznesowe
 6.	Możliwość generowania raportów, z poszczególnych zadań oraz poszczególnych pracowników do analizy pracy 
 7.	Komunikator pozwalający rozmawiać członkom zespołu jak i między zespołami
 
-Opis komunikacji 
+Opis komunikacji.
   Nadawca        Odbiorca        Mechanizm        Przesyłane dane
 
 1. Komunikacja Synchroniczna
