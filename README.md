@@ -50,3 +50,5 @@ Opis komunikacji.
 CZĘŚĆ III
 1. Gdzie system jest rozproszony?
 - Rozproszona warstwa danych - Zamiast trzymać dane uzytkownikow w jednym dysku, dane sa rozproszone na wiele serwerow
+- Load Balancer - Zakłada, że pod spodem nei ma jednego serwera ale cała pula i rozdziela je zapobiegajac przeciazeniu maszyny
+- Zdecentralizowane procesy w tle - Gdy użytkownik zleci wygenerowanie potężnego raportu, żądanie to nie obciąża głównego serwera. Zlecenie trafia do kolejki, a osobne, rozproszone serwery typu "Worker" podejmują to zadanie.
