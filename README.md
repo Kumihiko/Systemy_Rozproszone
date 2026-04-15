@@ -47,4 +47,6 @@ Opis komunikacji.
 - Eventy - Któtkie komunikaty o zmianie statusu. Zamiast przesyłac całe zadania, system przesyła informacje np. "uzytkownik X zmienił status zadania Y"
 - Websockety - Dane przesyłane do serwisow czasu rzeczywistego, które wypychają zmiany do przeglądarki użytkownika bez konieczności odświeżania strony
 
-
+CZĘŚĆ III
+1. Gdzie system jest rozproszony?
+- Rozproszona warstwa danych - Zamiast trzymać dane uzytkownikow w jednym dysku, dane sa rozproszone na wiele serwerow
