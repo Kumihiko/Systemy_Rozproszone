@@ -74,4 +74,14 @@ Dzięki zastosowaniu Shardingu, awaria jednego, który obsługuje np Europe nie 
   - Dostosowanie systemu tak, aby dane obywatelii Unii Europejskiej były przechowywane jedynie w Europie zgodnie z RODO, i tak samo w innych krajach / kontynentach
   - Regularne zlecanie zewnętrznym firmom testów penetracyjnych, aby chronić dane firm korzystających z naszych tablic  
 
-4. 
+4. Jakie kompromisy wynikają z twierdzenia CAP?
+- Spójność + odporność na podział
+Jeśli serwery stracą łączność i nie mogą synchronizować danych, system zacznie odrzucać zapytania od użytkowników, aby mieć pewność, że nie zwróci starych nieprawidłowych danych.
+stosowane w systemach bankowych, transakcjach finansowych czy rezerwacji biletów
+
+- Dostępność + odporność na podział
+Jeśli sieć padnie, każdy serwer nadal odpowiada na zapytania na podstawie danych jakie ma lokalnie. Przez jakiś czas może zwracać przestarzałe informacje, a kiedy sieć wróci serwer wyrówna braki
+stosowane w Sieciach społecznościowych, systemach Iot, koszykach zakupowych
+
+- Spójność + dostępność
+Gwarantuje spójność i dostępność ale nie obsługuje awarii między węzłami. W praktyce oznacza to rezygnacje z rozproszenia i trzymanie całej bazy na jednym serwerze.
