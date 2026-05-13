@@ -52,6 +52,7 @@ CZĘŚĆ III
 - Rozproszona warstwa danych - Zamiast trzymać dane uzytkownikow w jednym dysku, dane sa rozproszone na wiele serwerow
 - Load Balancer - Zakłada, że pod spodem nei ma jednego serwera ale cała pula i rozdziela je zapobiegajac przeciazeniu maszyny
 - Zdecentralizowane procesy w tle - Gdy użytkownik zleci wygenerowanie potężnego raportu, żądanie to nie obciąża głównego serwera. Zlecenie trafia do kolejki, a osobne, rozproszone serwery typu "Worker" podejmują to zadanie.
+
 2. Jak system radzi sobie z częściową awarią?
 - Awaria systemów przetwarzających w tle np Notification service
 Gdy użytkownik coś zapisuje, service Layer dodaje to do bazy danych i wysyła zdarzenie do kolejki Kafka. Zdarzenia zaczynają sie buforować w kolejce, a gdy serwis wróci do życia automatycznie pobierze wszystko z kolejki zdarzeń Kafki i nadrobi zaległości.
@@ -61,3 +62,16 @@ Load balancer stale sprawdza ich stan, jeśli zauważy, że instancja nr X przes
 jeśli jakaś usługa padnie, Integration Service odbiera błąd. Zamiast pokazywać go użytkownikowi, serwis stosuje taktyke ponawiaj próbę coraz rzadziej. Spróbuje wyslac webhooka za 5 minut, a jeśli znowu sie nei uda to za 10 minut.
 - Częściowa awaria bazy danych
 Dzięki zastosowaniu Shardingu, awaria jednego, który obsługuje np Europe nie wyklucza z użycia tego w Stanach
+
+3. Jak wygląda strategia skalowania?
+- Skalowanie infrastruktury i kosztów
+- - Projekt zakłada pełne wykorzystanie chmury obliczeniowej np AWS, Azure
+  - Ponieważ aplikacja jest globalna, nie może stać tylk ow jednym miejscu np Europie, ponieważ użytkownicy np. w Tokio mieliby spore opóźnienie. System zostanie wdrozony w kilku regionach geograficznych jednocześnie
+  - Serwery w chmurze będą automatycznie się uruchamiać i wyłączać w zależności od natężenia ruchu co pozwoloi na obniżenie kosztów utrzymania.
+  - Ciężkie pliki jak grafiki, skrypty będa serwowane z najbliższego węzła dla danego użytkownika
+  - Wprowadzenie wsparcia technicznego działającego 24/7 w różnych strefach czasowych aby reagować na awarie
+  - zatrudnienie ludzi od Site Reliability aby zapewnić 99.9% dostępności systemu w skali roku
+  - Dostosowanie systemu tak, aby dane obywatelii Unii Europejskiej były przechowywane jedynie w Europie zgodnie z RODO, i tak samo w innych krajach / kontynentach
+  - Regularne zlecanie zewnętrznym firmom testów penetracyjnych, aby chronić dane firm korzystających z naszych tablic  
+
+4. 
