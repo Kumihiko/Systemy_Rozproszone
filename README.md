@@ -52,3 +52,12 @@ CZĘŚĆ III
 - Rozproszona warstwa danych - Zamiast trzymać dane uzytkownikow w jednym dysku, dane sa rozproszone na wiele serwerow
 - Load Balancer - Zakłada, że pod spodem nei ma jednego serwera ale cała pula i rozdziela je zapobiegajac przeciazeniu maszyny
 - Zdecentralizowane procesy w tle - Gdy użytkownik zleci wygenerowanie potężnego raportu, żądanie to nie obciąża głównego serwera. Zlecenie trafia do kolejki, a osobne, rozproszone serwery typu "Worker" podejmują to zadanie.
+2. Jak system radzi sobie z częściową awarią?
+- Awaria systemów przetwarzających w tle np Notification service
+Gdy użytkownik coś zapisuje, service Layer dodaje to do bazy danych i wysyła zdarzenie do kolejki Kafka. Zdarzenia zaczynają sie buforować w kolejce, a gdy serwis wróci do życia automatycznie pobierze wszystko z kolejki zdarzeń Kafki i nadrobi zaległości.
+- Awaria jednego z serwerów aplikacji
+Load balancer stale sprawdza ich stan, jeśli zauważy, że instancja nr X przestaje odpowiadać, wykreśla ją z listy i przekierowuje cały ruch na pozostałe instancje, system działa troche wolniej ale dalej działa
+- Awaria usług zewnętrznych
+jeśli jakaś usługa padnie, Integration Service odbiera błąd. Zamiast pokazywać go użytkownikowi, serwis stosuje taktyke ponawiaj próbę coraz rzadziej. Spróbuje wyslac webhooka za 5 minut, a jeśli znowu sie nei uda to za 10 minut.
+- Częściowa awaria bazy danych
+Dzięki zastosowaniu Shardingu, awaria jednego, który obsługuje np Europe nie wyklucza z użycia tego w Stanach
