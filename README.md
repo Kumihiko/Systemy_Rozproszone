@@ -85,3 +85,6 @@ stosowane w Sieciach społecznościowych, systemach Iot, koszykach zakupowych
 
 - Spójność + dostępność
 Gwarantuje spójność i dostępność ale nie obsługuje awarii między węzłami. W praktyce oznacza to rezygnacje z rozproszenia i trzymanie całej bazy na jednym serwerze.
+
+5. Jaki model spójności danych został przyjęty?
+- Wykorzystany został model hybrydowy, kluczowe operacje jak modyfikacja statusu zadań czy zarządzanie uprawnieniami realizowane są w głównej rozproszonej bazie z zachowaniem silnej spójności, co gwarantuje integralnośc. Jednocześnie warstwy poboczne jak kolejkowanie zdarzeń, czy pamięc podręczna i powiadomienia oraz moduł do raportów opierają się na ostatecznej spójności.
